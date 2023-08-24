@@ -3,7 +3,7 @@ from .models import *
 from .serializers import CarSerializer,ReservationSerializer
 from rest_framework import viewsets
 # from rest_framework.permissions import IsAdminUser,IsAuthenticated
-# from .permissions import IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly
 from datetime import datetime,date
 
 # Create your views here.
@@ -11,7 +11,7 @@ class CarView(viewsets.ModelViewSet):
     queryset=Car.objects.all()
     serializer_class=CarSerializer
     # permission_classes= [IsAdminUser]  
-    # permission_classes= [IsAdminOrReadOnly]  
+    permission_classes= [IsAdminOrReadOnly]  
 
     # şu andan onceki uçuşları getirme
     # def get_queryset(self):
