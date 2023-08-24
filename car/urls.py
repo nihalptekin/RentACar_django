@@ -7,6 +7,7 @@ router.register("cars",CarView)
 router.register("resv",ReservationView)
 
 urlpatterns = [
+    # path('auth/), include
     path('', include(router.urls)),
 
 ]

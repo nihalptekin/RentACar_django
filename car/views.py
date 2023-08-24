@@ -14,21 +14,21 @@ class CarView(viewsets.ModelViewSet):
     # permission_classes= [IsAdminOrReadOnly]  
 
     # şu andan onceki uçuşları getirme
-    def get_queryset(self):
-        queryset = super().get_queryset()
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
 
-        now = datetime.now()
-        current_time = now.strftime('%H:%M:%S')
-        today = date.today()
+        # now = datetime.now()
+        # current_time = now.strftime('%H:%M:%S')
+        # today = date.today()
         
-        if self.request.user.is_staff: 
-            return queryset
-        else:
-            # print(now) 
-            # now o anki tarih ve zamanı alıyor
-            queryset = Reservation.objects.filter(start_date=now)
+        # if self.request.user.is_staff: 
+        #     return queryset
+        # else:
+        #     # print(now) 
+        #     # now o anki tarih ve zamanı alıyor
+        #     queryset = Reservation.objects.filter(start_date=now)
                 
-            return queryset
+        #     return queryset
 
 class ReservationView(viewsets.ModelViewSet):
 

@@ -4,7 +4,13 @@ from .models import *
 class CarSerializer(serializers.ModelSerializer):   
     class Meta:
         model=Car
-        fields="__all__"
+        fields=('plate_number',
+                'brand',
+                'model',
+                'year',
+                'gear',
+                'rent_per_day',
+                'availability',)
 
 
 class ReservationSerializer(serializers.ModelSerializer):
@@ -16,5 +22,8 @@ class ReservationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Reservation
-        fields="__all__"
+        fields=('customer',
+                'car',
+                'start_date',
+                'and_date',)
 
