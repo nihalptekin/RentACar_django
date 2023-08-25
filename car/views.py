@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from .serializers import CarSerializer,ReservationSerializer
 from .models import Car,Reservation
-from rest_framework.permissions import IsAdminUser,IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAdminUser,IsAuthenticated
 from .permissions import IsAdminOrReadOnly
 from django.db.models import Q, OuterRef, Exists
 # Create your views here.
@@ -12,7 +12,7 @@ from django.db.models import Q, OuterRef, Exists
 class CarView(ModelViewSet):
     serializer_class=CarSerializer
     queryset=Car.objects.all()
-    permission_classes=[IsAdminOrReadOnly,]
+    permission_classes=[IsAdminOrReadOnly]
 
     def get_queryset(self):
         
@@ -60,3 +60,10 @@ class CarView(ModelViewSet):
 class ReservationView(ModelViewSet):
     serializer_class=ReservationSerializer
     queryset=Reservation.objects.all()
+    permission_classes=[IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.is_staff:
+            return queryset
+        return queryset.filter(user=self.request.user)

@@ -1,38 +1,43 @@
 from rest_framework import serializers
-from .models import *
+from .models import Car,Reservation
 
-class CarSerializer(serializers.ModelSerializer):   
+class CarSerializer(serializers.ModelSerializer):
     is_available=serializers.BooleanField()
+
     class Meta:
         model=Car
-        fields=('plate_number',
+        fields=(
+                'plate_number',
                 'brand',
                 'model',
                 'year',
                 'gear',
                 'rent_per_day',
-                'availability',)
+                'availability',
+                'is_available',
+                )
+        
     def get_fields(self):
         fields=super().get_fields()
         request=self.context.get('request')
         if request.user and not request.user.is_staff:
             fields.pop('plate_number')
-            fields.pop('rent_per_day')
             fields.pop('availability')
+            fields.pop('rent_per_day')
         return fields
 
 
+
+
 class ReservationSerializer(serializers.ModelSerializer):
-    car=serializers.StringRelatedField()
-    car_id=serializers.IntegerField()
-
-    user=serializers.StringRelatedField()
-    user_id=serializers.IntegerField()
-
     class Meta:
         model=Reservation
-        fields=('customer',
+        fields=(
+                'user',
                 'car',
                 'start_date',
-                'and_date',)
-
+                'end_date',
+                )
+    
+ 
+  

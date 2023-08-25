@@ -10,4 +10,5 @@ urlpatterns = [
     # path('auth/), include
     path('', include(router.urls)),
 
+
 ]
