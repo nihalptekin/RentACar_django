@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import *
 
 class CarSerializer(serializers.ModelSerializer):   
+    is_available=serializers.BooleanField()
     class Meta:
         model=Car
         fields=('plate_number',
@@ -18,6 +19,7 @@ class CarSerializer(serializers.ModelSerializer):
             fields.pop('plate_number')
             fields.pop('rent_per_day')
             fields.pop('availability')
+        return fields
 
 
 class ReservationSerializer(serializers.ModelSerializer):

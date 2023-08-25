@@ -37,7 +37,7 @@ class Reservation(models.Model):
    
 
     def __str__(self):
-        return f"{self.customer}-{self.car}-{self.start_date} - {self.end_date}"
+        return f"{self.user}-{self.car}-{self.start_date} - {self.end_date}"
     
     # def save(self, *args, **kwargs):
     #     # Rezervasyon tarih çakışması kontrolü
